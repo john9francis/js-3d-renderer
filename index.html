@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: 2px solid black;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    3D Renderer
+  </h1>
+  <main>
+    <canvas id="3dcanvas"></canvas>
+  </main>
+</body>
+<script>
+  var canvas = document.getElementById("3dcanvas");
+  var ctx = canvas.getContext("2d");
+  ctx.moveTo(10,20);
+  ctx.lineTo(200, 100);
+  ctx.stroke();
+</script>
+</html>
