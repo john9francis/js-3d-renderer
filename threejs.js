@@ -16,10 +16,35 @@ const material = new THREE.MeshBasicMaterial({
 });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
-camera.position.z = 5;
+
+
+// Create a line
+const points = [
+  new THREE.Vector3(-10, 0, 0),
+  new THREE.Vector3(0, 10, 0),
+  new THREE.Vector3(10, 0, 0)
+]
+const lineGeom = new THREE.BufferGeometry().setFromPoints(points);
+
+const lineMat = new THREE.LineBasicMaterial({color: 0x0000ff});
+
+const line = new THREE.Line(lineGeom, lineMat);
+scene.add(line);
+
+camera.position.y = 5;
+
+let angle = 0;
+function rotateCameraAround() {
+  const radius = 15;
+  camera.position.x = radius * Math.cos(angle);
+  camera.position.z = radius * Math.sin(angle);
+
+  camera.lookAt(cube.position)
+
+  angle += 0.01;
+}
 
 renderer.setAnimationLoop(() => {
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.001;
+  rotateCameraAround();
   renderer.render(scene, camera);
 })
