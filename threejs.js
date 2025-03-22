@@ -40,8 +40,6 @@ function rotateCameraAround() {
   camera.position.z = radius * Math.sin(angle);
 
   camera.lookAt(cube.position)
-
-  angle += 0.01;
 }
 
 renderer.setAnimationLoop(() => {
@@ -58,14 +56,17 @@ renderer.domElement.addEventListener("mousedown", (event) => {
   mouseClicked = true;
 });
 
-renderer.domElement.addEventListener("mouseup", (event) => {
-  console.log("ck");
+function resetMouse(){
   mouseClicked = false;
+  lastX = 0;
+}
+
+renderer.domElement.addEventListener("mouseup", (event) => {
+  resetMouse();
 });
 
 renderer.domElement.addEventListener("mouseleave", (event) => {
-  console.log("bye");
-  mouseClicked = false;
+  resetMouse();
 });
 
 
@@ -73,5 +74,12 @@ let lastX = 0;
 document.addEventListener("mousemove", (event) => {
   if (!mouseClicked) return;
 
-  console.log(event.clientX);
+  // get the x velocity and add it to the angle from earlier
+
+  if (lastX > 0){
+    const dx = (event.clientX - lastX)/100;
+    angle += dx
+  }
+
+  lastX = event.clientX
 });
