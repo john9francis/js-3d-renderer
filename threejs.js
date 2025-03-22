@@ -5,7 +5,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth/2, window.innerHeight/2);
+renderer.setSize(window.innerWidth/1.5, window.innerHeight/1.5);
 document.body.appendChild(renderer.domElement);
 
 // Create cube
@@ -31,13 +31,13 @@ const lineMat = new THREE.LineBasicMaterial({color: 0x0000ff});
 const line = new THREE.Line(lineGeom, lineMat);
 scene.add(line);
 
-camera.position.y = 2;
-
 let angle = 0;
+let radius = 5;
 function rotateCameraAround() {
-  const radius = 5;
   camera.position.x = radius * Math.cos(angle);
   camera.position.z = radius * Math.sin(angle);
+
+  camera.position.y = radius / 2
 
   camera.lookAt(cube.position)
 }
@@ -83,3 +83,14 @@ document.addEventListener("mousemove", (event) => {
 
   lastX = event.clientX
 });
+
+// zoom capability
+renderer.domElement.addEventListener("wheel", (event) =>{
+  event.preventDefault();
+
+  radius += event.deltaY / 10;
+
+  // keep in bounds
+  if (radius < 2) radius = 2;
+  if (radius > 20) radius = 20;
+})
