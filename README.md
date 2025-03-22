@@ -16,3 +16,9 @@
 # Useful websites
 - [w3 schools html canvas](https://www.w3schools.com/html/html5_canvas.asp)
 - [3JS docs](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene)
+
+# TODO
+- [ ] Label the axes with unit vectors
+- [ ] Render text
+- [ ] Allow user control of the viewer
+- [ ] Json parsing to get the objects rendered including at least a box and a line

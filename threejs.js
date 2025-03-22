@@ -5,7 +5,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(window.innerWidth/2, window.innerHeight/2);
 document.body.appendChild(renderer.domElement);
 
 // Create cube
@@ -20,9 +20,9 @@ scene.add(cube);
 
 // Create a line
 const points = [
-  new THREE.Vector3(-10, 0, 0),
-  new THREE.Vector3(0, 10, 0),
-  new THREE.Vector3(10, 0, 0)
+  new THREE.Vector3(-1, 0, 0),
+  new THREE.Vector3(0, 2, 0),
+  new THREE.Vector3(3, 0, 0)
 ]
 const lineGeom = new THREE.BufferGeometry().setFromPoints(points);
 
@@ -31,11 +31,11 @@ const lineMat = new THREE.LineBasicMaterial({color: 0x0000ff});
 const line = new THREE.Line(lineGeom, lineMat);
 scene.add(line);
 
-camera.position.y = 5;
+camera.position.y = 2;
 
 let angle = 0;
 function rotateCameraAround() {
-  const radius = 15;
+  const radius = 5;
   camera.position.x = radius * Math.cos(angle);
   camera.position.z = radius * Math.sin(angle);
 
