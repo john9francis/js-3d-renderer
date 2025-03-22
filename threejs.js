@@ -48,3 +48,30 @@ renderer.setAnimationLoop(() => {
   rotateCameraAround();
   renderer.render(scene, camera);
 })
+
+
+// controls for the camera
+let mouseClicked = false;
+
+renderer.domElement.addEventListener("mousedown", (event) => {
+  console.log("cli");
+  mouseClicked = true;
+});
+
+renderer.domElement.addEventListener("mouseup", (event) => {
+  console.log("ck");
+  mouseClicked = false;
+});
+
+renderer.domElement.addEventListener("mouseleave", (event) => {
+  console.log("bye");
+  mouseClicked = false;
+});
+
+
+let lastX = 0;
+document.addEventListener("mousemove", (event) => {
+  if (!mouseClicked) return;
+
+  console.log(event.clientX);
+});
