@@ -15,3 +15,4 @@
 
 # Useful websites
 - [w3 schools html canvas](https://www.w3schools.com/html/html5_canvas.asp)
+- [3JS docs](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene)
