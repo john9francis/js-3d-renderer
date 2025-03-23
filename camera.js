@@ -57,6 +57,18 @@ class Camera {
     this.update();
   }
 
+  shiftLookPositionX(dx) {
+    // some math goes into this one
+
+    this.update();
+  }
+
+  shiftLookPositionY(dy) {
+    this.lookPoint.y += dy;
+
+    this.update();
+  }
+
   update(){
     // x,y plane first
     this.theCamera.position.x = this.radius * Math.cos(this.cameraXAngle) * Math.cos(this.worldYAngle);

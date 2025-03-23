@@ -66,16 +66,20 @@ renderer.domElement.addEventListener("mouseleave", (event) => {
 document.addEventListener("mousemove", (event) => {
   if (!mouseClicked) return;
 
-  // get the x velocity and add it to the angle from earlier
-  // note: this is confusing but if the user moves along the
-  // x axis (side to side), it rotates AROUND the camera's y,
-  // (up vector) 
   if (lastX > 0 && lastY > 0){
-    const dy = (event.clientX - lastX) / 100;
-    const dx = (event.clientY - lastY) / 100;
+    const dx = (event.clientX - lastX) / 100;
+    const dy = (event.clientY - lastY) / 100;
 
-    cameraClass.rotateAroundY(dy);
-    cameraClass.rotateAroundX(dx);
+    if (event.shiftKey) {
+      cameraClass.shiftLookPositionY(dy);
+      cameraClass.shiftLookPositionX(dx);
+    } else {
+      // note: this is confusing but if the user moves along the
+    // x axis (side to side), it rotates AROUND the camera's y,
+    // (up vector) 
+      cameraClass.rotateAroundY(dx);
+      cameraClass.rotateAroundX(dy);
+    }
   }
 
   lastX = event.clientX
