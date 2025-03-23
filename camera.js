@@ -28,14 +28,22 @@ class Camera {
     return this.theCamera;
   }
 
-  shiftAroundY(dAngle){
+  rotateAroundY(dAngle){
     this.worldYAngle += dAngle;
 
     this.update();
   }
 
-  shiftAroundX(dx){
-    this.cameraXAngle += dx;
+  rotateAroundX(dAngle){
+    this.cameraXAngle += dAngle;
+
+    // set max angle
+    if (this.cameraXAngle > Math.PI / 2) {
+      this.cameraXAngle = Math.PI / 2;
+    }
+    if (this.cameraXAngle < - Math.PI / 2) {
+      this.cameraXAngle = - Math.PI / 2;
+    }
 
     this.update();
   }
@@ -50,13 +58,12 @@ class Camera {
   }
 
   update(){
-    // y,z plane first
-    this.theCamera.position.z = this.radius * Math.cos(this.cameraXAngle);
+    // x,y plane first
+    this.theCamera.position.x = this.radius * Math.cos(this.cameraXAngle) * Math.cos(this.worldYAngle);
     this.theCamera.position.y = this.radius * Math.sin(this.cameraXAngle);
-
-    // then x,z plane
-    this.theCamera.position.x = this.radius * Math.cos(this.worldYAngle);
-    this.theCamera.position.z = this.radius * Math.sin(this.worldYAngle);
+    
+    // then z
+    this.theCamera.position.z = this.radius * Math.cos(this.cameraXAngle) * Math.sin(this.worldYAngle);
 
     // todo: figure out how to rotate around y
     // this.theCamera.position.y = this.radius / 2;
