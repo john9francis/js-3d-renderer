@@ -10,28 +10,30 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth/1.5, window.innerHeight/1.5);
 document.body.appendChild(renderer.domElement);
 
-// Create cube
-const geometry = new THREE.BoxGeometry(1,1,1);
-const material = new THREE.MeshBasicMaterial({
-  color: 0x00ff00,
-  wireframe: true
-});
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+// Create axis lines
+const xLineGeom = new THREE.BufferGeometry().setFromPoints([
+  new THREE.Vector3(0,0,0),
+  new THREE.Vector3(1,0,0)
+])
+const yLineGeom = new THREE.BufferGeometry().setFromPoints([
+  new THREE.Vector3(0,0,0),
+  new THREE.Vector3(0,1,0)
+])
+const zLineGeom = new THREE.BufferGeometry().setFromPoints([
+  new THREE.Vector3(0,0,0),
+  new THREE.Vector3(0,0,1)
+])
 
+const xLineMat = new THREE.LineBasicMaterial({color: 0xff0000});
+const yLineMat = new THREE.LineBasicMaterial({color: 0x00ff00});
+const zLineMat = new THREE.LineBasicMaterial({color: 0x0000ff});
 
-// Create a line
-const points = [
-  new THREE.Vector3(-1, 0, 0),
-  new THREE.Vector3(0, 2, 0),
-  new THREE.Vector3(3, 0, 0)
-]
-const lineGeom = new THREE.BufferGeometry().setFromPoints(points);
-
-const lineMat = new THREE.LineBasicMaterial({color: 0x0000ff});
-
-const line = new THREE.Line(lineGeom, lineMat);
-scene.add(line);
+const xLine = new THREE.Line(xLineGeom, xLineMat);
+const yLine = new THREE.Line(yLineGeom, yLineMat);
+const zLine = new THREE.Line(zLineGeom, zLineMat);
+scene.add(xLine);
+scene.add(yLine);
+scene.add(zLine);
 
 renderer.setAnimationLoop(() => {
   renderer.render(scene, camera);
