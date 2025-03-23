@@ -22,7 +22,8 @@
 - [ ] Render text
 - [x] Allow user control of the viewer
 - [ ] Json parsing to get the objects rendered including at least a box and a line
+- [ ] Make the movement options radio buttons instead and make them big
 
 # Bugs
 - [ ] On x,y moving it does some weird things at different angles... it will like curve when moving or move backwards. see camera.js shiftLookPositionX function
-- [ ] Zoom doesn't work on mobile
+- [x] Zoom doesn't work on mobile
