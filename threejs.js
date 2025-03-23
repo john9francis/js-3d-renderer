@@ -64,6 +64,18 @@ renderer.domElement.addEventListener("mouseleave", (event) => {
   resetMouse();
 });
 
+// Add a button to toggle movemode
+const moveModeToggle = document.createElement("input");
+moveModeToggle.type = "checkbox"
+moveModeToggle.id = "toggle"
+
+const toggleLabel = document.createElement("label");
+toggleLabel.textContent = "Move mode";
+toggleLabel.setAttribute("for", "toggle");
+
+document.body.appendChild(moveModeToggle);
+document.body.appendChild(toggleLabel);
+
 
 document.addEventListener("mousemove", (event) => {
   if (!mouseClicked) return;
@@ -72,7 +84,10 @@ document.addEventListener("mousemove", (event) => {
     const dx = (event.clientX - lastX) / 100;
     const dy = (event.clientY - lastY) / 100;
 
-    if (event.shiftKey) {
+    if (
+      event.shiftKey ||
+      document.getElementById("toggle").checked
+    ) {
       cameraClass.shiftLookPositionY(dy);
       cameraClass.shiftLookPositionX(dx);
     } else {
