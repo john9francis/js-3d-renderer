@@ -35,6 +35,8 @@ scene.add(xLine);
 scene.add(yLine);
 scene.add(zLine);
 
+
+// Main rendering loop
 renderer.setAnimationLoop(() => {
   renderer.render(scene, camera);
 })
