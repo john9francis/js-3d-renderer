@@ -59,12 +59,22 @@ class Camera {
 
   shiftLookPositionX(dx) {
     // some math goes into this one
+    // note: we shift based on the camera's rotation
+    const shiftX = dx * Math.cos(this.worldYAngle);
+    const shiftZ = dx * Math.sin(this.worldYAngle);
+    
+    this.lookPoint.x += shiftX;
+    this.lookPoint.z += shiftZ;
+    this.theCamera.position.x += shiftX;
+    this.theCamera.position.z += shiftZ;
+
 
     this.update();
   }
 
   shiftLookPositionY(dy) {
     this.lookPoint.y += dy;
+    this.theCamera.position.y += dy;
 
     this.update();
   }
