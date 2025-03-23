@@ -1,8 +1,10 @@
 import * as THREE from 'three';
+import Camera from './camera.js';
 
 // Create scene
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const cameraClass = new Camera();
+const camera = cameraClass.getTheCamera();
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth/1.5, window.innerHeight/1.5);
@@ -31,19 +33,7 @@ const lineMat = new THREE.LineBasicMaterial({color: 0x0000ff});
 const line = new THREE.Line(lineGeom, lineMat);
 scene.add(line);
 
-let angle = 0;
-let radius = 5;
-function rotateCameraAround() {
-  camera.position.x = radius * Math.cos(angle);
-  camera.position.z = radius * Math.sin(angle);
-
-  camera.position.y = radius / 2
-
-  camera.lookAt(cube.position)
-}
-
 renderer.setAnimationLoop(() => {
-  rotateCameraAround();
   renderer.render(scene, camera);
 })
 
@@ -52,10 +42,10 @@ renderer.setAnimationLoop(() => {
 let mouseClicked = false;
 
 renderer.domElement.addEventListener("mousedown", (event) => {
-  console.log("cli");
   mouseClicked = true;
 });
 
+let lastX = 0;
 function resetMouse(){
   mouseClicked = false;
   lastX = 0;
@@ -70,7 +60,6 @@ renderer.domElement.addEventListener("mouseleave", (event) => {
 });
 
 
-let lastX = 0;
 document.addEventListener("mousemove", (event) => {
   if (!mouseClicked) return;
 
@@ -78,19 +67,16 @@ document.addEventListener("mousemove", (event) => {
 
   if (lastX > 0){
     const dx = (event.clientX - lastX)/100;
-    angle += dx
+    cameraClass.shiftAroundY(dx);
   }
 
   lastX = event.clientX
 });
 
+
 // zoom capability
 renderer.domElement.addEventListener("wheel", (event) =>{
   event.preventDefault();
 
-  radius += event.deltaY / 10;
-
-  // keep in bounds
-  if (radius < 2) radius = 2;
-  if (radius > 20) radius = 20;
+  cameraClass.shiftRadius(event.deltaY / 10);
 })
