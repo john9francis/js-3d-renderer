@@ -50,11 +50,16 @@ class Camera {
   }
 
   update(){
+    // y,z plane first
+    this.theCamera.position.z = this.radius * Math.cos(this.cameraXAngle);
+    this.theCamera.position.y = this.radius * Math.sin(this.cameraXAngle);
+
+    // then x,z plane
     this.theCamera.position.x = this.radius * Math.cos(this.worldYAngle);
     this.theCamera.position.z = this.radius * Math.sin(this.worldYAngle);
 
     // todo: figure out how to rotate around y
-    this.theCamera.position.y = this.radius / 2;
+    // this.theCamera.position.y = this.radius / 2;
 
     this.theCamera.lookAt(this.lookPoint);
   }
