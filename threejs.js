@@ -7,7 +7,7 @@ const cameraClass = new Camera();
 const camera = cameraClass.getTheCamera();
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth/1.5, window.innerHeight/1.5);
+renderer.setSize(window.innerWidth/1.25, window.innerHeight/1.25);
 document.body.appendChild(renderer.domElement);
 
 // Create axis lines

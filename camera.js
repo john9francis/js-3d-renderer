@@ -67,9 +67,6 @@ class Camera {
     
     this.lookPoint.x += shiftX;
     this.lookPoint.z += shiftZ;
-    this.theCamera.position.x += shiftX;
-    this.theCamera.position.z += shiftZ;
-
 
     this.update();
   }
@@ -83,8 +80,8 @@ class Camera {
 
   update(){
     // x,y plane first
-    this.theCamera.position.x = this.radius * Math.cos(this.cameraXAngle) * Math.cos(this.worldYAngle);
-    this.theCamera.position.y = this.radius * Math.sin(this.cameraXAngle);
+    this.theCamera.position.x = this.lookPoint.x + this.radius * Math.cos(this.cameraXAngle) * Math.cos(this.worldYAngle);
+    this.theCamera.position.y = this.lookPoint.y + this.radius * Math.sin(this.cameraXAngle);
     
     // then z
     this.theCamera.position.z = this.radius * Math.cos(this.cameraXAngle) * Math.sin(this.worldYAngle);
