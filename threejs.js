@@ -35,6 +35,11 @@ scene.add(xLine);
 scene.add(yLine);
 scene.add(zLine);
 
+// add a cube
+const cubeGeom = new THREE.BoxGeometry(1,1,1);
+const cubeMat = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true});
+const cubeMesh = new THREE.Mesh(cubeGeom, cubeMat);
+scene.add(cubeMesh)
 
 // Main rendering loop
 renderer.setAnimationLoop(() => {
