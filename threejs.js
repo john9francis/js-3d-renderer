@@ -111,8 +111,50 @@ function zoom(event) {
 
 
 // event listeners
+
+// Mouse events
 renderer.domElement.addEventListener("mousedown", mousedown);
 renderer.domElement.addEventListener("mouseup", resetMouse);
 renderer.domElement.addEventListener("mouseleave", resetMouse);
 document.addEventListener("mousemove", mouseMove);
 renderer.domElement.addEventListener("wheel", zoom);
+
+// Touch events (mobile support)
+renderer.domElement.addEventListener("touchstart", (event) => {
+  event.preventDefault(); // Prevent scrolling while interacting
+  mousedown(event.touches[0]); // Use the first touch point
+});
+
+renderer.domElement.addEventListener("touchend", resetMouse);
+renderer.domElement.addEventListener("touchcancel", resetMouse);
+
+renderer.domElement.addEventListener("touchmove", (event) => {
+  event.preventDefault();
+  mouseMove(event.touches[0]); // Track the first touch point like a mouse
+});
+
+// Pinch zoom (multi-touch)
+renderer.domElement.addEventListener("touchmove", handlePinchZoom);
+
+function handlePinchZoom(event) {
+  if (event.touches.length === 2) {
+    event.preventDefault();
+
+    const touch1 = event.touches[0];
+    const touch2 = event.touches[1];
+
+    // Calculate the current distance between the two fingers
+    const dx = touch2.clientX - touch1.clientX;
+    const dy = touch2.clientY - touch1.clientY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (lastTouchDistance) {
+      const zoomDelta = distance - lastTouchDistance;
+      zoom({ deltaY: -zoomDelta }); // Simulate mouse wheel event
+    }
+
+    lastTouchDistance = distance;
+  } else {
+    lastTouchDistance = null;
+  }
+}
