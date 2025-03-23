@@ -4,27 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    canvas {
-      border: 2px solid black;
-    }
-  </style>
 </head>
 <body>
   <h1>
-    3D Renderer
+    ThreeJS 3D renderer
   </h1>
-  <main>
-    <a href="./threejs.html">ThreeJS version</a>
-    <br>
-    <canvas id="3dcanvas"></canvas>
-  </main>
 </body>
-<script>
-  var canvas = document.getElementById("3dcanvas");
-  var ctx = canvas.getContext("2d");
-  ctx.moveTo(10,20);
-  ctx.lineTo(200, 100);
-  ctx.stroke();
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.174.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.174.0/examples/jsm/"
+    }
+  }
 </script>
+<script type="module" src="./threejs.js"></script>
 </html>
