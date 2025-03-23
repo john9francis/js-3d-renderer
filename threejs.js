@@ -47,15 +47,11 @@ renderer.domElement.addEventListener("mousedown", (event) => {
 
 let lastX = 0;
 let lastY = 0;
-let movingX = false;
-let movingY = false;
 
 function resetMouse(){
   mouseClicked = false;
   lastX = 0;
   lastY = 0;
-  movingX = false;
-  movingY = false;
 }
 
 renderer.domElement.addEventListener("mouseup", (event) => {
@@ -76,13 +72,8 @@ document.addEventListener("mousemove", (event) => {
     const dx = (event.clientX - lastX) / 100;
     const dy = (event.clientY - lastY) / 100;
 
-    if (Math.abs(dx) > Math.abs(dy) && !movingY) {
-      cameraClass.shiftAroundY(dx);
-      movingX = true;
-    } else if (!movingX) {
-      cameraClass.shiftAroundX(dy);
-      movingY = true;
-    }
+    cameraClass.shiftAroundY(dx);
+    cameraClass.shiftAroundX(dy);
   }
 
   lastX = event.clientX
