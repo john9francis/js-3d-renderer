@@ -137,7 +137,7 @@ renderer.domElement.addEventListener("touchmove", (event) => {
 renderer.domElement.addEventListener("touchmove", handlePinchZoom);
 
 function handlePinchZoom(event) {
-  if (event.touches.length === 2) {
+  if (event.touches.length == 2) {
     event.preventDefault();
 
     const touch1 = event.touches[0];
@@ -150,7 +150,7 @@ function handlePinchZoom(event) {
 
     if (lastTouchDistance) {
       const zoomDelta = distance - lastTouchDistance;
-      zoom({ deltaY: -zoomDelta }); // Simulate mouse wheel event
+      cameraClass.shiftRadius(zoomDelta / 10);
     }
 
     lastTouchDistance = distance;
