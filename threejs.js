@@ -47,17 +47,26 @@ renderer.setAnimationLoop(() => {
 })
 
 // more DOM elements
-// Add a button to toggle movemode
-const moveModeToggle = document.createElement("input");
-moveModeToggle.type = "checkbox"
-moveModeToggle.id = "toggle"
+// Add a dropdown to toggle movemode
+const moveModeToggle = document.createElement("select");
+
+const movementOpts = ["Rotate", "Move", "Zoom"]
+
+movementOpts.forEach((text) => {
+  const option = document.createElement("option");
+  option.textContent = text;
+  option.value = text;
+  moveModeToggle.appendChild(option);
+});
+
+moveModeToggle.id = "moveMode"
 
 const toggleLabel = document.createElement("label");
-toggleLabel.textContent = "Move mode";
-toggleLabel.setAttribute("for", "toggle");
+toggleLabel.textContent = "Mode:";
+toggleLabel.setAttribute("for", moveModeToggle.id);
 
-document.body.appendChild(moveModeToggle);
 document.body.appendChild(toggleLabel);
+document.body.appendChild(moveModeToggle);
 
 
 
@@ -86,14 +95,23 @@ function mouseMove(event){
 
     if (
       event.shiftKey ||
-      document.getElementById("toggle").checked
+      moveModeToggle.value === "Move"
     ) {
+      // move mode
       cameraClass.shiftLookPositionY(dy);
       cameraClass.shiftLookPositionX(dx);
-    } else {
+    } 
+    else if (
+      moveModeToggle.value === "Zoom"
+    ) {
+      // zoom mode
+      cameraClass.shiftRadius(dy * 10);
+    }
+    else {
+      // default = rotate mode
       // note: this is confusing but if the user moves along the
-    // x axis (side to side), it rotates AROUND the camera's y,
-    // (up vector) 
+      // x axis (side to side), it rotates AROUND the camera's y,
+      // (up vector) 
       cameraClass.rotateAroundY(dx);
       cameraClass.rotateAroundX(dy);
     }
@@ -132,29 +150,3 @@ renderer.domElement.addEventListener("touchmove", (event) => {
   event.preventDefault();
   mouseMove(event.touches[0]); // Track the first touch point like a mouse
 });
-
-// Pinch zoom (multi-touch)
-renderer.domElement.addEventListener("touchmove", handlePinchZoom);
-
-function handlePinchZoom(event) {
-  if (event.touches.length == 2) {
-    event.preventDefault();
-
-    const touch1 = event.touches[0];
-    const touch2 = event.touches[1];
-
-    // Calculate the current distance between the two fingers
-    const dx = touch2.clientX - touch1.clientX;
-    const dy = touch2.clientY - touch1.clientY;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-
-    if (lastTouchDistance) {
-      const zoomDelta = distance - lastTouchDistance;
-      cameraClass.shiftRadius(zoomDelta / 10);
-    }
-
-    lastTouchDistance = distance;
-  } else {
-    lastTouchDistance = null;
-  }
-}
