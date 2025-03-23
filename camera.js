@@ -62,8 +62,8 @@ class Camera {
     // todo: switch it ^^
     // some math goes into this one
     // note: we shift based on the camera's rotation
-    const shiftX = dx * Math.sin(this.worldYAngle);
-    const shiftZ = dx * Math.cos(this.worldYAngle);
+    const shiftX = - dx * Math.abs(Math.sin(this.worldYAngle));
+    const shiftZ = dx * Math.abs(Math.cos(this.worldYAngle));
     
     this.lookPoint.x += shiftX;
     this.lookPoint.z += shiftZ;
