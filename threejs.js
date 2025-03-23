@@ -111,22 +111,8 @@ function zoom(event) {
 
 
 // event listeners
-renderer.domElement.addEventListener("mousedown", (event) => {
-  mousedown();
-});
-
-renderer.domElement.addEventListener("mouseup", (event) => {
-  resetMouse();
-});
-
-renderer.domElement.addEventListener("mouseleave", (event) => {
-  resetMouse();
-});
-
-document.addEventListener("mousemove", (event) => {
-  mouseMove(event);
-});
-
-renderer.domElement.addEventListener("wheel", (event) =>{
-  zoom(event);
-})
+renderer.domElement.addEventListener("mousedown", mousedown);
+renderer.domElement.addEventListener("mouseup", resetMouse);
+renderer.domElement.addEventListener("mouseleave", resetMouse);
+document.addEventListener("mousemove", mouseMove);
+renderer.domElement.addEventListener("wheel", zoom);
