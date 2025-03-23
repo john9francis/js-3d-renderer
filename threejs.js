@@ -46,31 +46,7 @@ renderer.setAnimationLoop(() => {
   renderer.render(scene, camera);
 })
 
-
-// controls for the camera
-let mouseClicked = false;
-
-renderer.domElement.addEventListener("mousedown", (event) => {
-  mouseClicked = true;
-});
-
-let lastX = 0;
-let lastY = 0;
-
-function resetMouse(){
-  mouseClicked = false;
-  lastX = 0;
-  lastY = 0;
-}
-
-renderer.domElement.addEventListener("mouseup", (event) => {
-  resetMouse();
-});
-
-renderer.domElement.addEventListener("mouseleave", (event) => {
-  resetMouse();
-});
-
+// more DOM elements
 // Add a button to toggle movemode
 const moveModeToggle = document.createElement("input");
 moveModeToggle.type = "checkbox"
@@ -84,7 +60,24 @@ document.body.appendChild(moveModeToggle);
 document.body.appendChild(toggleLabel);
 
 
-document.addEventListener("mousemove", (event) => {
+
+// controls for the camera
+let mouseClicked = false;
+
+function mousedown(){
+  mouseClicked = true;
+}
+
+let lastX = 0;
+let lastY = 0;
+
+function resetMouse(){
+  mouseClicked = false;
+  lastX = 0;
+  lastY = 0;
+}
+
+function mouseMove(event){
   if (!mouseClicked) return;
 
   if (lastX > 0 && lastY > 0){
@@ -108,12 +101,32 @@ document.addEventListener("mousemove", (event) => {
 
   lastX = event.clientX
   lastY = event.clientY
-});
+}
 
-
-// zoom capability
-renderer.domElement.addEventListener("wheel", (event) =>{
+function zoom(event) {
   event.preventDefault();
 
   cameraClass.shiftRadius(event.deltaY / 10);
+}
+
+
+// event listeners
+renderer.domElement.addEventListener("mousedown", (event) => {
+  mousedown();
+});
+
+renderer.domElement.addEventListener("mouseup", (event) => {
+  resetMouse();
+});
+
+renderer.domElement.addEventListener("mouseleave", (event) => {
+  resetMouse();
+});
+
+document.addEventListener("mousemove", (event) => {
+  mouseMove(event);
+});
+
+renderer.domElement.addEventListener("wheel", (event) =>{
+  zoom(event);
 })
