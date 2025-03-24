@@ -67,6 +67,7 @@ movementOpts.forEach((text) => {
 });
 
 moveModeToggle.id = "moveMode"
+moveModeToggle.style.margin = "5px"
 
 const toggleLabel = document.createElement("label");
 toggleLabel.textContent = "Mode:";
