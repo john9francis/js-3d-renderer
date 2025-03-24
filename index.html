@@ -15,6 +15,15 @@
     a {
       color: black;
     }
+    .moveModeToggle {
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .moveModeToggle select {
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
@@ -25,23 +34,33 @@
     <h3>
       By <a href="https://john9francis.github.io">John Francis</a>
     </h3>
+
     <div id="rendererContainer" style="height: 50vh;"></div>
+
+    <div class="moveModeToggle">
+      <label for="moveMode" style="margin: 5px;">Mode:</label>
+      <select name="moveMode" id="moveMode" style="margin: 5px;">
+        <option value="Rotate" selected>Rotate</option>
+        <option value="Move">Move</option>
+        <option value="Zoom">Zoom</option>
+      </select>
+    </div>
+    <h2>
+      Controls
+    </h2>
+    <h3>
+      Desktop
+    </h3>
+    <p>
+      Rotate around by clicking and dragging with the mouse. Clicking and dragging while holding shift will move the camera around. Scrolling up or down (or pinching if using a trackpad) will zoom in or out.
+    </p>
+    <h3>
+      Mobile
+    </h3>
+    <p>
+      To rotate, swipe left, right, up, or down. To move, change the "Mode" dropdown to "Move" and then move by swiping left, right, up, or down. To zoom, change the Mode to zoom and then swipe up to zoom in and down to zoom out. 
+    </p>
   </main>
-  <h2>
-    Controls
-  </h2>
-  <h3>
-    Desktop
-  </h3>
-  <p>
-    Rotate around by clicking and dragging with the mouse. Clicking and dragging while holding shift will move the camera around. Scrolling up or down (or pinching if using a trackpad) will zoom in or out.
-  </p>
-  <h3>
-    Mobile
-  </h3>
-  <p>
-    To rotate, swipe left, right, up, or down. To move, change the "Mode" dropdown to "Move" and then move by swiping left, right, up, or down. To zoom, change the Mode to zoom and then swipe up to zoom in and down to zoom out. 
-  </p>
 </body>
 <script type="importmap">
   {

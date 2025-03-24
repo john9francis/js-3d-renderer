@@ -65,32 +65,7 @@ scene.add(cubeMesh)
 // Main rendering loop
 renderer.setAnimationLoop(() => {
   renderer.render(scene, camera);
-})
-
-// more DOM elements
-// Add a dropdown to toggle movemode
-const moveModeToggle = document.createElement("select");
-
-const movementOpts = ["Rotate", "Move", "Zoom"]
-
-movementOpts.forEach((text) => {
-  const option = document.createElement("option");
-  option.textContent = text;
-  option.value = text;
-  moveModeToggle.appendChild(option);
 });
-
-moveModeToggle.id = "moveMode"
-moveModeToggle.style.margin = "5px"
-
-const toggleLabel = document.createElement("label");
-toggleLabel.textContent = "Mode:";
-toggleLabel.setAttribute("for", moveModeToggle.id);
-
-document.querySelector("main").appendChild(toggleLabel);
-document.querySelector("main").appendChild(moveModeToggle);
-
-
 
 // controls for the camera
 let mouseClicked = false;
@@ -108,6 +83,7 @@ function resetMouse(){
   lastY = 0;
 }
 
+const moveModeToggle = document.getElementById("moveMode");
 function mouseMove(event){
   if (!mouseClicked) return;
 
