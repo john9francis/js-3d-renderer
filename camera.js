@@ -22,8 +22,8 @@ class Camera {
     this.lookPoint = new THREE.Vector3(0,0,0);
     this.radius = 5;
 
-    this.worldYAngle = 0;
-    this.cameraXAngle = 0;
+    this.worldYAngle = Math.PI / 4.5;
+    this.cameraXAngle = Math.PI / 7;
 
     this.update();
   }
@@ -77,6 +77,10 @@ class Camera {
   }
 
   shiftLookPositionX(dx) {
+
+    // TODO: Add sensitivity here
+    dx *= this.radius / 5;
+
     // Depending on how the user is looking,
     // have the x or z position switch
 
@@ -131,6 +135,9 @@ class Camera {
   }
 
   shiftLookPositionY(dy) {
+    // TODO: Add sensitivity here
+    dy *= this.radius / 5;
+
     this.lookPoint.y += dy;
     this.theCamera.position.y += dy;
 

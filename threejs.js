@@ -31,6 +31,11 @@ const zLineMat = new THREE.LineBasicMaterial({color: 0x0000ff});
 const xLine = new THREE.Line(xLineGeom, xLineMat);
 const yLine = new THREE.Line(yLineGeom, yLineMat);
 const zLine = new THREE.Line(zLineGeom, zLineMat);
+
+xLine.frustumCulled = false;
+yLine.frustumCulled = false;
+zLine.frustumCulled = false;
+
 scene.add(xLine);
 scene.add(yLine);
 scene.add(zLine);
@@ -38,7 +43,7 @@ scene.add(zLine);
 cameraClass.setAxisLines(xLine, yLine, zLine);
 
 // add a cube
-const cubeGeom = new THREE.BoxGeometry(1,1,1);
+const cubeGeom = new THREE.BoxGeometry(3,3,3);
 const cubeMat = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true});
 const cubeMesh = new THREE.Mesh(cubeGeom, cubeMat);
 scene.add(cubeMesh)
