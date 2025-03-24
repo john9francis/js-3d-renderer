@@ -157,3 +157,12 @@ renderer.domElement.addEventListener("touchmove", (event) => {
   event.preventDefault();
   mouseMove(event.touches[0]); // Track the first touch point like a mouse
 });
+
+// screen resize events
+window.addEventListener("resize", () => {
+  const newWidth = window.innerWidth/1.5;
+  const newHeight = window.innerHeight/1.5;
+  renderer.setSize(newWidth, newHeight);
+  cameraClass.theCamera.aspect = newWidth / newHeight;
+  cameraClass.theCamera.updateProjectionMatrix();
+})
