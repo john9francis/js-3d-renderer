@@ -7,8 +7,22 @@ const cameraClass = new Camera();
 const camera = cameraClass.getTheCamera();
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth/1.5, window.innerHeight/1.5);
-document.querySelector("main").appendChild(renderer.domElement);
+
+const container = document.getElementById("rendererContainer");
+container.appendChild(renderer.domElement);
+
+function resizeRenderer(){
+  const newWidth = container.clientWidth
+  const newHeight = container.clientHeight
+  renderer.setSize(newWidth, newHeight);
+  cameraClass.theCamera.aspect = newWidth / newHeight;
+  cameraClass.theCamera.updateProjectionMatrix();
+}
+
+// screen resize events
+document.addEventListener("DOMContentLoaded", resizeRenderer);
+window.addEventListener("resize", resizeRenderer);
+
 
 // Create axis lines
 const xLineGeom = new THREE.BufferGeometry().setFromPoints([
@@ -157,12 +171,3 @@ renderer.domElement.addEventListener("touchmove", (event) => {
   event.preventDefault();
   mouseMove(event.touches[0]); // Track the first touch point like a mouse
 });
-
-// screen resize events
-window.addEventListener("resize", () => {
-  const newWidth = window.innerWidth/1.5;
-  const newHeight = window.innerHeight/1.5;
-  renderer.setSize(newWidth, newHeight);
-  cameraClass.theCamera.aspect = newWidth / newHeight;
-  cameraClass.theCamera.updateProjectionMatrix();
-})
