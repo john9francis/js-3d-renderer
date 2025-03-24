@@ -140,8 +140,7 @@ function zoom(event) {
 
 // Mouse events
 renderer.domElement.addEventListener("mousedown", mousedown);
-renderer.domElement.addEventListener("mouseup", resetMouse);
-renderer.domElement.addEventListener("mouseleave", resetMouse);
+document.addEventListener("mouseup", resetMouse);
 document.addEventListener("mousemove", mouseMove);
 renderer.domElement.addEventListener("wheel", zoom);
 
