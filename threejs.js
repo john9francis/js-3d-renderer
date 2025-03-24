@@ -8,7 +8,7 @@ const camera = cameraClass.getTheCamera();
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth/1.25, window.innerHeight/1.25);
-document.body.appendChild(renderer.domElement);
+document.querySelector("main").appendChild(renderer.domElement);
 
 // Create axis lines
 const xLineGeom = new THREE.BufferGeometry().setFromPoints([
@@ -72,8 +72,8 @@ const toggleLabel = document.createElement("label");
 toggleLabel.textContent = "Mode:";
 toggleLabel.setAttribute("for", moveModeToggle.id);
 
-document.body.appendChild(toggleLabel);
-document.body.appendChild(moveModeToggle);
+document.querySelector("main").appendChild(toggleLabel);
+document.querySelector("main").appendChild(moveModeToggle);
 
 
 
