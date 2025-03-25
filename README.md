@@ -17,6 +17,7 @@
 - [w3 schools html canvas](https://www.w3schools.com/html/html5_canvas.asp)
 - [3JS docs](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene)
 - [loading obj files](https://threejs.org/docs/#examples/en/loaders/OBJLoader)
+- [boolean solids](https://discourse.threejs.org/t/how-to-implement-boolean-operations-in-the-current-version-of-threejs/46767/2)
 
 # TODO
 - [ ] Label the axes with unit vectors
